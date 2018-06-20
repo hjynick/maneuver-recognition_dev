@@ -69,34 +69,37 @@ shinyUI(
     dashboardHeader(title="Maneuver Recognition"),
     dashboardSidebar(fileInput('file1', 'Choose xlsx file',
                                  accept = c(".xlsx")),
+                     
                      sliderInput("slider1", label = h3("Sample_Range"), min = 1, 
                                  max = 30, value = 10),
                      sliderInput("slider2",label=h3("Sample_Start"),min=1,
-                                 max=200,value = 1)
+                                 max=500,value = 1)
     ),
     dashboardBody(
     
-     fluidRow( box(
+     fluidRow( column(6,box(
         title = "Global_Map",
         collapsible = TRUE,
         width = "100%",
-        height = "100%",
-        leafletOutput("map1")
+        height = 1000,
+        leafletOutput("map1",height = 900)
         
-    )),
-     fluidRow(
-       column(8,box(
+     )),
+       column(6,box(
         title = "Sample_Map",
         width = "100%",
         height = "100%",
-        leafletOutput("map2")
-      )),
-       column(4,box(
-         title = "Maneuver Recognition", width = "100%",height = 460, background = "light-blue",
-         textOutput("sw")
-       )))
+        leafletOutput("map2",height = 710)
+      ),box(valueBoxOutput("sw",width = "100%"),height="100%",width = "100%"
+            ))
+     
+       #column(6,
+         #      box(
+         # title = "Maneuver Recognition", width = "100%",height = 460, background = "light-blue",
+         # textOutput("sw")
+       ))
       
     )
   
 
-))
+)
